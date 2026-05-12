@@ -41,7 +41,7 @@ pipeline {
         stage('Install Dependencies') {
         // ─────────────────────────────────────────────────────────────
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 8, unit: 'MINUTES') {
                     dir("${PROJECT_DIR}") {
                         // --legacy-peer-deps evita conflictos comunes en Angular 19+
                         sh 'npm ci --legacy-peer-deps'
