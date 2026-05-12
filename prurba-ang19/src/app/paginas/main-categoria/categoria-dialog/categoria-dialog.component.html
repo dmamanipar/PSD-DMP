@@ -1,0 +1,20 @@
+<mat-dialog-content>
+  <mat-toolbar><span>Formulario Categoria</span></mat-toolbar>
+
+  <div class="example-container">
+    <form [formGroup]="form"  class="example-container" #categoriaForm="ngForm">
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre">
+        @if (f['nombre'].errors?.['required'] && f['nombre'].touched) {
+          <small class="invalid">Is required</small>
+        }
+        @if (f['nombre'].errors?.['minlength'] && f['nombre'].touched) {
+          <small class="invalid">Minlength is 3</small>
+        }
+      </mat-form-field>
+      <br/>
+      <button mat-button (click)="operate()" [disabled]="form.invalid">Done</button>
+      <button mat-button color="accent" (click)="close()">Cancel</button>
+    </form>
+  </div>
+</mat-dialog-content>

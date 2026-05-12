@@ -1,0 +1,134 @@
+<div class="dashboard-container">
+  <!-- Welcome Banner -->
+  <mat-card class="welcome-banner">
+    <div class="banner-content">
+      <div>
+        <h1 class="welcome-title">¡Bienvenido de nuevo, {{this.username}}! 👋</h1>
+        <p class="welcome-subtitle">Aquí tienes un resumen de tu actividad de hoy.</p>
+      </div>
+      <div class="banner-icon">
+        <mat-icon>dashboard</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <!-- Stat Card 1 -->
+    <mat-card class="stat-card">
+      <div class="stat-icon primary">
+        <mat-icon>shopping_cart</mat-icon>
+      </div>
+      <div class="stat-info">
+        <p class="stat-label">Ventas Hoy</p>
+        <h2 class="stat-value">124</h2>
+        <p class="stat-trend positive">
+          <mat-icon>trending_up</mat-icon> +14%
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Stat Card 2 -->
+    <mat-card class="stat-card">
+      <div class="stat-icon accent">
+        <mat-icon>attach_money</mat-icon>
+      </div>
+      <div class="stat-info">
+        <p class="stat-label">Ingresos Diarios</p>
+        <h2 class="stat-value">S/ 4,250.00</h2>
+        <p class="stat-trend positive">
+          <mat-icon>trending_up</mat-icon> +8%
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Stat Card 3 -->
+    <mat-card class="stat-card">
+      <div class="stat-icon warn">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+      <div class="stat-info">
+        <p class="stat-label">Stock Crítico</p>
+        <h2 class="stat-value">12</h2>
+        <p class="stat-trend negative">
+          <mat-icon>trending_down</mat-icon> Revisar
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Stat Card 4 -->
+    <mat-card class="stat-card">
+      <div class="stat-icon success">
+        <mat-icon>people</mat-icon>
+      </div>
+      <div class="stat-info">
+        <p class="stat-label">Nuevos Clientes</p>
+        <h2 class="stat-value">45</h2>
+        <p class="stat-trend positive">
+          <mat-icon>trending_up</mat-icon> +22%
+        </p>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Recent Activity and Chart Placeholder -->
+  <div class="dashboard-body">
+    <!-- Chart Placeholder -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Resumen de Ventas de la Semana</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="chart-content">
+        <div class="fake-chart">
+          <!-- Static representation of a bar chart -->
+          <div class="bar" style="height: 40%;"><span>Lun</span></div>
+          <div class="bar" style="height: 65%;"><span>Mar</span></div>
+          <div class="bar" style="height: 35%;"><span>Mié</span></div>
+          <div class="bar" style="height: 80%;"><span>Jue</span></div>
+          <div class="bar" style="height: 55%;"><span>Vie</span></div>
+          <div class="bar" style="height: 90%;"><span>Sáb</span></div>
+          <div class="bar" style="height: 30%;"><span>Dom</span></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Recent Activity -->
+    <mat-card class="activity-card">
+      <mat-card-header>
+        <mat-card-title>Actividad Reciente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon primary-bg"><mat-icon>receipt</mat-icon></div>
+            <div class="activity-text">
+              <p>Nueva venta <strong>#VN-0042</strong></p>
+              <span>Hace 5 minutos</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon accent-bg"><mat-icon>person_add</mat-icon></div>
+            <div class="activity-text">
+              <p>Cliente registrado <strong>Juan Pérez</strong></p>
+              <span>Hace 1 hora</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon warn-bg"><mat-icon>inventory</mat-icon></div>
+            <div class="activity-text">
+              <p>Inventario actualizado <strong>+50 Laptops</strong></p>
+              <span>Hace 3 horas</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon success-bg"><mat-icon>check_circle</mat-icon></div>
+            <div class="activity-text">
+              <p>Cierre de caja exitoso</p>
+              <span>Ayer</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

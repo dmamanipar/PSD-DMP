@@ -1,0 +1,24 @@
+<form class="login-form" #loginForm="ngForm" (submit)="login()">
+  <div class="background" [style.background-image]="'url(' + backgroundImageUrl + ')'"></div>
+  <mat-card class="login-card">
+  <mat-card-header>
+  <mat-card-title class="app-title">Bienvenido Sys Almacen</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <mat-form-field class="full-width">
+  <input matInput placeholder="Usuario" name="user" [(ngModel)]="user" required>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+  <input matInput type="password" placeholder="Clave" name="clave" [(ngModel)]="clave" required>
+  </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+  </mat-card-actions>
+  <div class="additional-links">
+  <a routerLink="/forgot" class="forgot-password">¿Olvidaste tu clave?</a>
+  <span class="separator">|</span>
+  <a routerLink="/new-user" class="create-account">Crear nueva cuenta</a>
+  </div>
+  </mat-card>
+ </form>

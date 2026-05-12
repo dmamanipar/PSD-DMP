@@ -1,0 +1,200 @@
+<div class="div-field-spacing-general">
+<form [formGroup]="salesFormGroup" (submit)="operate()">
+
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Carrito de Ventas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="section-flex">
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>Nombre del Cliente</mat-label>
+          <input matInput placeholder="Cliente" [formControl]="clientControl" [matAutocomplete]="autoClient">
+          <mat-autocomplete #autoClient="matAutocomplete" [displayWith]="showClientName" (optionSelected)="onClientSelected($event)">
+            @for (cl of clientFiltered$ | async; track $index) {
+              <mat-option [value]="cl">
+                {{cl.nombres}}
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>RUC/DNI</mat-label>
+          <input matInput formControlName="dniruc" placeholder="RUC/DNI" [readonly]="true"/>
+          <mat-hint align="start" *ngIf="salesFormGroup.controls['dniruc'].invalid && salesFormGroup.controls['dniruc'].touched" >
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" placeholder="Dirección" />
+          <mat-hint align="start" *ngIf="salesFormGroup.controls['direccion'].invalid && salesFormGroup.controls['direccion'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+
+        <button mat-fab extended (click)="onNewClient($event)">
+          Nuevo Cliente
+        </button>
+      </div>
+
+
+      <div class="section-flex">
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Nombre del Producto</mat-label>
+          <input matInput placeholder="Producto" [formControl]="producControl" [matAutocomplete]="autoProd" >
+          <mat-autocomplete #autoProd="matAutocomplete" [displayWith]="showName" (optionSelected)="onProductSelected($event)">
+            @for (ex of productFiltered$ | async; track $index) {
+              <mat-option [value]="ex">
+                {{ex.nombre}}
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Id. Producto</mat-label>
+          <input matInput formControlName="idProducto" placeholder="Id Producto" [readonly]="true"/>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Stock</mat-label>
+          <input matInput formControlName="stock" placeholder="Stock" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Cantidad</mat-label>
+          <input matInput formControlName="cantidad" placeholder="Cantidad"/>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Precio Unitario</mat-label>
+          <input matInput formControlName="pu" placeholder="Precio unitario" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing">
+          <mat-label>Precio Total</mat-label>
+          <input matInput formControlName="ptotal" placeholder="Precio Total" [readonly]="true"/>
+        </mat-form-field>
+
+        <button mat-fab extended (click)="onAddCarrito($event)" [disabled]="isButtonDisabled">
+          Agregar
+        </button>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+  <mat-card style="margin-top: 10px">
+    <mat-card-content>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="idCarrito">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.idCarrito}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dniruc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI-RUC </th>
+            <td mat-cell *matCellDef="let row"> {{row.dniruc}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="producto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+            <td mat-cell *matCellDef="let row"> {{row.producto}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreProducto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Producto</th>
+            <td mat-cell *matCellDef="let row"> {{row.nombreProducto}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <td mat-cell *matCellDef="let row"> {{row.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="punitario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> P.Unitario </th>
+            <td mat-cell *matCellDef="let row"> {{row.punitario}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ptotal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> P.Total </th>
+            <td mat-cell *matCellDef="let row"> {{row.ptotal}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+            <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef > ACTIONS </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button color="accent" (click)="delete(row.idCarrito)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[3, 5, 10, 25, 100]" aria-label="Select page of products"></mat-paginator>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card style="margin-top: 10px">
+    <mat-card-content>
+      <div class="section-flex">
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>Base Imponible</mat-label>
+          <input matInput formControlName="bimponble" placeholder="B. Imponible" [readonly]="true"/>
+          <mat-hint align="start" *ngIf="salesFormGroup.controls['bimponble'].invalid && salesFormGroup.controls['bimponble'].touched" >
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>IGV</mat-label>
+          <input matInput formControlName="igv" placeholder="Igv"  [readonly]="true"/>
+          <mat-hint align="start" *ngIf="salesFormGroup.controls['igv'].invalid && salesFormGroup.controls['igv'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>Descuento</mat-label>
+          <input matInput formControlName="descuento" placeholder="Descuento" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field-spacing" appearance="fill">
+          <mat-label>Importe Total</mat-label>
+          <input matInput formControlName="importet" placeholder="Importe Total" />
+          <mat-hint align="start" *ngIf="salesFormGroup.controls['importet'].invalid && salesFormGroup.controls['importet'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+
+
+
+        <button mat-fab extended [disabled]="isButtonDisabledReg">
+          Registrar Venta
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</form>
+</div>
+
+
+

@@ -1,0 +1,91 @@
+<mat-card appearance="outlined" class="example-card">
+  <mat-card-header>
+    <mat-card-title >Formulario Producto</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="form-grid">
+      <div class="form-row">
+        <mat-form-field >
+          <mat-label>Nombre del Producto</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre" />
+          <mat-hint align="start" *ngIf="productForm.controls['nombre'].invalid && productForm.controls['nombre'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Precio Unitario</mat-label>
+          <input matInput formControlName="pu" placeholder="Precio unitario" />
+          <mat-hint align="start" *ngIf="productForm.controls['pu'].invalid && productForm.controls['pu'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Precio Unitario Anterior</mat-label>
+          <input matInput formControlName="puOld" type="number" placeholder="Precio unitario anterior" />
+          <mat-hint align="start" *ngIf="productForm.controls['puOld'].invalid && productForm.controls['puOld'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Utilidad</mat-label>
+          <input matInput formControlName="utilidad" type="number" placeholder="Utilidad" />
+          <mat-hint align="start" *ngIf="productForm.controls['utilidad'].invalid && productForm.controls['utilidad'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Stock</mat-label>
+          <input matInput formControlName="stock" type="number" placeholder="Stock" />
+          <mat-hint align="start" *ngIf="productForm.controls['stock'].invalid && productForm.controls['stock'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Stock Old</mat-label>
+          <input matInput formControlName="stockOld" type="number" placeholder="stockOld" />
+          <mat-hint align="start" *ngIf="productForm.controls['stockOld'].invalid && productForm.controls['stockOld'].touched">
+            Este campo es requerido</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+
+        <mat-form-field>
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="categoria">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.idCategoria" >{{ categoria.nombre }}</mat-option>
+          </mat-select>
+          <mat-hint align="start" *ngIf="productForm.controls['categoria'].invalid && productForm.controls['categoria'].touched" >Este campo es requerido</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Marca</mat-label>
+          <mat-select formControlName="marca">
+            <mat-option *ngFor="let marca of marcas" [value]="marca.idMarca" >{{ marca.nombre }}</mat-option>
+          </mat-select>
+          <mat-hint align="start" *ngIf="productForm.controls['marca'].invalid && productForm.controls['marca'].touched" >Campo requerido</mat-hint>
+        </mat-form-field>
+
+
+
+        <mat-form-field>
+          <mat-label>Unidad de Medida</mat-label>
+          <mat-select formControlName="unidadMedida" >
+            <!--<mat-option *ngFor="let unidad of unidadesMedida" [value]="unidad.idUnidad" >{{ unidad.nombre}}</mat-option>-->
+            @for (um of unidadMedidas$ | async; track $index){
+              <mat-option [value]="um.idUnidad" >{{ um.nombreMedida}}</mat-option>
+            }
+          </mat-select>
+          <mat-hint align="start" *ngIf="productForm.controls['unidadMedida'].invalid && productForm.controls['unidadMedida'].touched" >Este campo es requerido</mat-hint>
+        </mat-form-field>
+
+
+
+      </div>
+      <br/>
+      <div class="example-button-row">
+        <button mat-flat-button type="submit">Guardar</button>
+        <button mat-stroked-button type="reset" (click)="resetButton()" >Cancelar</button>
+      </div>
+    </form>
+    <p *ngIf="productSaved" class="success-message">Producto guardado exitosamente.</p>
+  </mat-card-content>
+</mat-card>

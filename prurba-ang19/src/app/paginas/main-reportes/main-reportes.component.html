@@ -1,0 +1,25 @@
+<button mat-button (click)="viewReport()">View PDF</button>
+<button mat-button (click)="downloadReport()">Download PDF</button>
+
+
+@if (pdfSrc) {
+  <pdf-viewer [src]="pdfSrc" [render-text]="true" style="width: 800px; height: 800px;"></pdf-viewer>
+}
+
+<button mat-button  onclick="document.getElementById('flFile').click()">Select File</button>
+<input id="flFile" type="file" style="display: none;" (change)="selectFile($event)" >
+@if (filename) {
+  <p>Filename is: {{filename}}</p>
+}
+<button mat-button (click)="upload()" [disabled]="!selectedFiles">Upload</button>
+<button mat-button (click)="uploadCloud()" [disabled]="!selectedFiles">Upload Cloud</button>
+
+
+<div>
+  <input type="number" [(ngModel)]="imageId" placeholder="Enter Image ID" />
+  <button mat-button (click)="viewImage()">View Image</button>
+</div>
+
+@if (imageData) {
+  <img mat-card [src]="imageSignal()" width="500" height="500">
+}

@@ -1,0 +1,22 @@
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+.invalid {
+  color: red;
+}
+.example-button-row {
+  display: flex;
+}
+.example-button-row button {
+  margin: 0 8px;
+}
+/*Formulario*/
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.form-row {
+  display: contents;
+}
+

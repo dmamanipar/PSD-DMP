@@ -1,0 +1,31 @@
+<form [formGroup]="form"  class="example-container" (submit)="operate()" #frmUnidadMedida="ngForm">
+
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idUnidad">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="nombreMedida" formControlName="nombreMedida">
+    @if (f['nombreMedida'].errors?.['required'] && f['nombreMedida'].touched) {
+      <small class="invalid">Is required</small>
+    }
+    @if (f['nombreMedida'].errors?.['minlength'] && f['nombreMedida'].touched) {
+      <small class="invalid">Minlength is 3</small>
+    }
+  </mat-form-field>
+
+
+
+  <button mat-button type="submit" [disabled]="frmUnidadMedida.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Done</span>
+  </button>
+
+  <button mat-button type="button"  color="accent" routerLink="/pages/unidadmedida">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancel</span>
+  </button>
+
+</form>

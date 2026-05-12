@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #10b981;
+  --background-color: #f3f4f6;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Inter', "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+  background-image: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05), transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 40%);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
