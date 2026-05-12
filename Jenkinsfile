@@ -89,7 +89,7 @@ pipeline {
                                     -Dsonar.projectKey=prurba-ang19 \
                                     -Dsonar.projectName=prurba-ang19 \
                                     -Dsonar.sources=src \
-                                    -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \                                  
+                                    -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
                                     -Dsonar.token=${SONAR_TOKEN} \
                                     -Dsonar.host.url=${SONAR_HOST_URL}
                             """
