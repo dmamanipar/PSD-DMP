@@ -81,7 +81,7 @@ pipeline {
         // ─────────────────────────────────────────────────────────────
 		// se omitio esta linea:  -Dsonar.javascript.lcov.reportPaths=coverage/prurba-ang19/lcov.info 
             steps {
-                timeout(time: 4, unit: 'MINUTES') {
+                timeout(time: 15, unit: 'MINUTES') {
                     withSonarQubeEnv('sonarqube') {
                         dir("${PROJECT_DIR}") {
                             sh """
@@ -104,7 +104,7 @@ pipeline {
         // ─────────────────────────────────────────────────────────────
             steps {
                 sleep(10)
-                timeout(time: 4, unit: 'MINUTES') {
+                timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
