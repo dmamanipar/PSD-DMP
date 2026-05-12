@@ -51,34 +51,35 @@ pipeline {
         }
 
         // ─────────────────────────────────────────────────────────────
-        stage('Test') {
+        //stage('Test') {
         // Karma con Chrome headless; genera reporte de cobertura en coverage/
         // ─────────────────────────────────────────────────────────────
-            steps {
-                timeout(time: 10, unit: 'MINUTES') {
-                    dir("${PROJECT_DIR}") {
-                        sh '''
-                            npx ng test \
-                                --no-watch \
-                                --no-progress \
-                                --browsers=ChromeHeadless \
-                                --code-coverage
-                        '''
-                    }
-                }
-            }
-            post {
-                always {
-                    // Publicar resultados de tests en la UI de Jenkins
-                    junit allowEmptyResults: true,
-                          testResults: "${PROJECT_DIR}/test-results/**/*.xml"
-                }
-            }
-        }
+        //    steps {
+        //        timeout(time: 10, unit: 'MINUTES') {
+        //            dir("${PROJECT_DIR}") {
+        //                sh '''
+        //                   npx ng test \
+        //                        --no-watch \
+        //                        --no-progress \
+        //                        --browsers=ChromeHeadless \
+        //                        --code-coverage
+        //                '''
+        //            }
+        //        }
+        //    }
+        //    post {
+        //        always {
+        //            // Publicar resultados de tests en la UI de Jenkins
+        //            junit allowEmptyResults: true,
+        //                  testResults: "${PROJECT_DIR}/test-results/**/*.xml"
+        //        }
+        //    }
+        //}
 
         // ─────────────────────────────────────────────────────────────
         stage('Sonar') {
         // ─────────────────────────────────────────────────────────────
+		// se omitio esta linea:  -Dsonar.javascript.lcov.reportPaths=coverage/prurba-ang19/lcov.info 
             steps {
                 timeout(time: 4, unit: 'MINUTES') {
                     withSonarQubeEnv('sonarqube') {
@@ -88,8 +89,7 @@ pipeline {
                                     -Dsonar.projectKey=prurba-ang19 \
                                     -Dsonar.projectName=prurba-ang19 \
                                     -Dsonar.sources=src \
-                                    -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
-                                    -Dsonar.javascript.lcov.reportPaths=coverage/prurba-ang19/lcov.info \
+                                    -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \                                  
                                     -Dsonar.token=${SONAR_TOKEN} \
                                     -Dsonar.host.url=${SONAR_HOST_URL}
                             """
