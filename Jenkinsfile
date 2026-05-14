@@ -80,6 +80,9 @@ pipeline {
         stage('Sonar') {
         // ─────────────────────────────────────────────────────────────
 		// se omitio esta linea:  -Dsonar.javascript.lcov.reportPaths=coverage/prurba-ang19/lcov.info 
+			tools {
+				jdk 'JDK21'
+			}
             steps {
                 timeout(time: 15, unit: 'MINUTES') {
                     withSonarQubeEnv('sonarqube') {
