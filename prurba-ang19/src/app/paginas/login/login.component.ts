@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+//${environment.baseHref}wallpaper.jpg
 export class LoginComponent {
   user!: string;
   clave!: string;
-  backgroundImageUrl = `${environment.baseHref}wallpaper.jpg`;
+  backgroundImageUrl = `wallpaper.jpg`;
   constructor(
   private authService: AuthService,
   private router: Router
